@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Digital";
+    src: url("../fonts/digital-7/digital-7.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#CalculatorContainer {
+    width: 400px;
+    background-color: lightgray;
+    border-radius: 4px;
+}
+
+#CalculatorDisplay {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 75px;
+    font-size: 36px;
+    color: white;
+    font-family: 'Digital', 'Times New Roman', Times, serif;
+}
+
+#CalculatorDisplayText {
+    margin-right: 12px;
+}
