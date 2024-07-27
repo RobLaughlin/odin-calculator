@@ -23,11 +23,22 @@ body {
     justify-content: right;
     align-items: center;
     height: 75px;
-    font-size: 36px;
-    color: white;
+    font-size: 60px;
+    color: black;
     font-family: 'Digital', 'Times New Roman', Times, serif;
+    border: 1px solid rgba(0, 0, 0, 0.486);
+    overflow-x: hidden;
 }
 
 #CalculatorDisplayText {
     margin-right: 12px;
+}
+
+#CalculatorBody {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calculatorBtn {
+    font-size: 24px;
 }
