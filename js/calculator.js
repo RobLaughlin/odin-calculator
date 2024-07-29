@@ -39,7 +39,6 @@ function digitClicked(e) {
 
     // Turn X.YYYYY into .YYYYY
     let truncated = val.toString().split('.');
-    console.log(truncated);
     if (truncated.length === 1) {
         truncated = truncated[0];
     }
@@ -80,6 +79,8 @@ function operatorClicked(e) {
             calculatorState.operator = operator;
         }
     }
+
+    calculatorState.decimalClicked = false;
     updateDisplay();
 }
 
@@ -189,7 +190,7 @@ function populateCalculatorButtons() {
                     case ".":
                         btn.addEventListener("click", decimalClicked); break;
                     case "1/x":
-                        btn.addEventListener("click", reciporcal); break;
+                        btn.addEventListener("click", reciprocal); break;
                     case "x²":
                         btn.addEventListener("click", square); break;
                     case "√x":
