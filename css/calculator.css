@@ -48,3 +48,40 @@ body {
 .calculatorBtn {
     font-size: 24px;
 }
+
+.calculatorBtn:hover {
+    background-color: lightgray;
+}
+
+.operatorBtn {
+    background-color: darkgray;
+}
+
+.operatorBtn:hover {
+    background-color: rgb(126, 126, 126);
+}
+
+.equalsBtn {
+    background-color: rgba(0,255,0,0.5);
+}
+
+.equalsBtn:hover {
+    background-color: rgba(0, 206, 0, 0.5);
+}
+
+.clearBtn {
+    background-color: rgba(255,0,255,0.5);
+}
+
+.clearBtn:hover {
+    background-color: rgba(198, 2, 198, 0.5);
+}
+
+.reciprocalBtn, .squareBtn, .sqrtBtn {
+    background-color: rgba(255,0,0,0.5);
+}
+
+.reciprocalBtn:hover, .squareBtn:hover, .sqrtBtn:hover {
+    background-color: rgba(192, 0, 0, 0.5);
+}
+
