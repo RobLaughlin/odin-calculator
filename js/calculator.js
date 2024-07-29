@@ -121,6 +121,34 @@ function decimalClicked() {
     }
 }
 
+function reciprocal() {
+    evaluate();
+    if (calculatorState.leftOperand == 0) {
+        alert("Cannot divide by 0.")
+    } 
+    else {
+        calculatorState.leftOperand = 1 / calculatorState.leftOperand;
+    }
+
+    updateDisplay();
+}
+
+function square() {
+    evaluate();
+    calculatorState.leftOperand = calculatorState.leftOperand**2;
+    updateDisplay();
+}
+
+function sqrt() {
+    evaluate();
+    if (calculatorState.leftOperand < 0) {
+        alert("No complex numbers here! Can't take the square root of a negative number.");
+    }
+    else {
+        calculatorState.leftOperand = Math.sqrt(calculatorState.leftOperand);
+    }
+    updateDisplay();
+}
 function populateCalculatorButtons() {
     // Populate the calculator buttons top to bottom, left to right.
     const SYMBOLS = [
@@ -160,6 +188,12 @@ function populateCalculatorButtons() {
                         btn.addEventListener("click", clearCalculator); break;
                     case ".":
                         btn.addEventListener("click", decimalClicked); break;
+                    case "1/x":
+                        btn.addEventListener("click", reciporcal); break;
+                    case "x²":
+                        btn.addEventListener("click", square); break;
+                    case "√x":
+                        btn.addEventListener("click", sqrt); break;
                 }
             }
             calcBody.appendChild(btn);
