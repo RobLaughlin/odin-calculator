@@ -85,3 +85,11 @@ body {
     background-color: rgba(192, 0, 0, 0.5);
 }
 
+.undoBtn {
+    background-color: skyblue;
+}
+
+.undoBtn:hover {
+    background-color: rgb(110, 168, 190);
+}
+

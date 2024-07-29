@@ -159,9 +159,11 @@ function populateCalculatorButtons() {
         ['4', '5', '6', '-'],
         ['1', '2', '3', '+'],
         ['0', '.', 'C', '/'],
-        ['1/x', 'x²', '√x', '=']];
+        ['1/x', 'x²', '√x', '='],
+        ['←']];
     const WIDTH = "25%";
     const BTN_HEIGHT = "100px";
+    const BACKSPACE_HEIGHT = "50px";
 
     let calcBody = document.getElementById("CalculatorBody");
     for (let i = 0; i < SYMBOLS.length; i++) {
@@ -213,6 +215,11 @@ function populateCalculatorButtons() {
                     case "√x":
                         btn.addEventListener("click", sqrt); 
                         btn.classList.add("sqrtBtn");
+                        break;
+                    case "←":
+                        btn.style.width = "100%";
+                        btn.style.height = BACKSPACE_HEIGHT;
+                        btn.classList.add("undoBtn");
                         break;
                 }
             }
