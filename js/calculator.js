@@ -2,6 +2,7 @@ let calculatorState = {
     leftOperand: 0,
     rightOperand: null,
     operator: null,
+    decimalClicked: false
 };
 
 function operate(l, r, operator) {
@@ -31,22 +32,39 @@ function updateDisplay() {
 function digitClicked(e) {
     // Populate display if symbol is a digit
 
+    let val = e.target.value;
+    if (calculatorState.decimalClicked) {
+        val = Number(val) / 10;
+    }
+
+    // Turn X.YYYYY into .YYYYY
+    let truncated = val.toString().split('.');
+    console.log(truncated);
+    if (truncated.length === 1) {
+        truncated = truncated[0];
+    }
+    else {
+        truncated = '.' + truncated[truncated.length - 1];
+    }
+
     // First, update the calculator state then update the display.
     if (calculatorState.operator === null) {
         if (calculatorState.leftOperand === 0) {
-            calculatorState.leftOperand = Number(e.target.value);
+            calculatorState.leftOperand = Number(val);
         }
         else {
-            calculatorState.leftOperand = Number(calculatorState.leftOperand.toString() + e.target.value.toString());
+            
+            calculatorState.leftOperand = Number(calculatorState.leftOperand.toString() + truncated);
         }
     }
     else if (calculatorState.rightOperand === null) {
-        calculatorState.rightOperand = Number(e.target.value);
+        calculatorState.rightOperand = Number(val);
     }
     else {
-        calculatorState.rightOperand = Number(calculatorState.rightOperand.toString() + e.target.value.toString());
+        calculatorState.rightOperand = Number(calculatorState.rightOperand.toString() + truncated);
     }
 
+    calculatorState.decimalClicked = false;
     updateDisplay();
 }
 
@@ -69,6 +87,7 @@ function clearCalculator() {
     calculatorState.leftOperand = 0;
     calculatorState.operator = null;
     calculatorState.rightOperand = null;
+    calculatorState.decimalClicked = false;
     updateDisplay();
 }
 
@@ -78,10 +97,30 @@ function evaluate() {
         calculatorState.leftOperand = result === null ? 0 : result;
         calculatorState.operator = null;
         calculatorState.rightOperand = null;
+        calculatorState.decimalClicked = false;
     }
 
     updateDisplay();
 }
+
+function decimalClicked() {
+    const displayText = document.getElementById("CalculatorDisplayText");
+    const displayTextContent = displayText.textContent;
+    
+    const numDecimals = displayTextContent.split('.').length - 1;
+    if (calculatorState.operator === null && numDecimals === 0) {
+        displayText.textContent += '.';
+        calculatorState.decimalClicked = true;
+    }
+    else if (calculatorState.operator !== null && calculatorState.rightOperand !== null) {
+        const rightOp = displayTextContent.split(calculatorState.operator)[1];
+        if (!rightOp.includes('.')) {
+            displayText.textContent += '.';
+            calculatorState.decimalClicked = true;
+        }
+    }
+}
+
 function populateCalculatorButtons() {
     // Populate the calculator buttons top to bottom, left to right.
     const SYMBOLS = [
@@ -119,6 +158,8 @@ function populateCalculatorButtons() {
                         btn.addEventListener("click", evaluate); break;
                     case "C":
                         btn.addEventListener("click", clearCalculator); break;
+                    case ".":
+                        btn.addEventListener("click", decimalClicked); break;
                 }
             }
             calcBody.appendChild(btn);

@@ -28,12 +28,16 @@ body {
     font-family: 'Digital', 'Times New Roman', Times, serif;
     border: 1px solid rgba(0, 0, 0, 0.486);
     overflow-x: hidden;
+    overflow-y: hidden;
+    max-height: 75px;
+    white-space: nowrap;
 }
 
 #CalculatorDisplayText {
     margin-right: 12px;
-    max-width: 400px;
     overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
 #CalculatorBody {
