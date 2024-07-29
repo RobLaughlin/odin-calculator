@@ -152,6 +152,14 @@ function sqrt() {
     }
     updateDisplay();
 }
+
+function undoBtnClicked() {
+    if (stateStack.length > 1) {
+        calculatorState = {...stateStack.pop()};
+    }
+    updateDisplay();
+}
+
 function populateCalculatorButtons() {
     // Populate the calculator buttons top to bottom, left to right.
     const SYMBOLS = [
@@ -181,7 +189,10 @@ function populateCalculatorButtons() {
             btn.style.cursor = "pointer";
 
             if (!isNaN(symbol)) {
-                btn.addEventListener("click", digitClicked);
+                btn.addEventListener("click", e => {
+                    stateStack.push({...calculatorState});
+                    digitClicked(e);
+                }); 
             }
             else {
                 switch (symbol) {
@@ -189,34 +200,56 @@ function populateCalculatorButtons() {
                     case "-":
                     case "+":
                     case "/":
-                        btn.addEventListener("click", operatorClicked);
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            operatorClicked(e);
+                        }); 
                         btn.classList.add("operatorBtn");
                         break;
                     case "=":
-                        btn.addEventListener("click", evaluate);
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            evaluate();
+                        }); 
                         btn.classList.add("equalsBtn");
                         break;
                     case "C":
-                        btn.addEventListener("click", clearCalculator);
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            clearCalculator();
+                        }); 
                         btn.classList.add("clearBtn");
                         break;
                     case ".":
-                        btn.addEventListener("click", decimalClicked); 
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            decimalClicked(e);
+                        }); 
                         btn.classList.add("decimalBtn");
                         break;
                     case "1/x":
-                        btn.addEventListener("click", reciprocal); 
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            reciprocal();
+                        }); 
                         btn.classList.add("reciprocalBtn");
                         break;
                     case "x²":
-                        btn.addEventListener("click", square);
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            square();
+                        }); 
                         btn.classList.add("squareBtn");
                         break;
                     case "√x":
-                        btn.addEventListener("click", sqrt); 
+                        btn.addEventListener("click", e => {
+                            stateStack.push({...calculatorState});
+                            sqrt();
+                        }); 
                         btn.classList.add("sqrtBtn");
                         break;
                     case "←":
+                        btn.addEventListener("click", undoBtnClicked); 
                         btn.style.width = "100%";
                         btn.style.height = BACKSPACE_HEIGHT;
                         btn.classList.add("undoBtn");
