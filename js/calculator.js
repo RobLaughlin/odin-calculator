@@ -172,6 +172,8 @@ function populateCalculatorButtons() {
             btn.style.width = WIDTH;
             btn.style.boxSizing = "border-box";
             btn.style.height = BTN_HEIGHT;
+            btn.style.border = '1px solid black';
+            btn.style.borderRadius = '2px';
 
             if (!isNaN(symbol)) {
                 btn.addEventListener("click", digitClicked);
@@ -182,19 +184,32 @@ function populateCalculatorButtons() {
                     case "-":
                     case "+":
                     case "/":
-                        btn.addEventListener("click", operatorClicked); break;
+                        btn.addEventListener("click", operatorClicked);
+                        btn.style.backgroundColor = "darkgray";
+                        break;
                     case "=":
-                        btn.addEventListener("click", evaluate); break;
+                        btn.addEventListener("click", evaluate);
+                        btn.style.backgroundColor = 'rgba(0,255,0,0.5)';
+                        break;
                     case "C":
-                        btn.addEventListener("click", clearCalculator); break;
+                        btn.addEventListener("click", clearCalculator);
+                        btn.style.backgroundColor = 'rgba(255,0,255,0.5)';
+                        break;
                     case ".":
-                        btn.addEventListener("click", decimalClicked); break;
+                        btn.addEventListener("click", decimalClicked); 
+                        break;
                     case "1/x":
-                        btn.addEventListener("click", reciprocal); break;
+                        btn.addEventListener("click", reciprocal); 
+                        btn.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                        break;
                     case "x²":
-                        btn.addEventListener("click", square); break;
+                        btn.addEventListener("click", square);
+                        btn.style.backgroundColor = 'rgba(255,0,0, 0.5)';
+                        break;
                     case "√x":
-                        btn.addEventListener("click", sqrt); break;
+                        btn.addEventListener("click", sqrt); 
+                        btn.style.backgroundColor = 'rgba(255,0,0, 0.5)';
+                        break;
                 }
             }
             calcBody.appendChild(btn);
